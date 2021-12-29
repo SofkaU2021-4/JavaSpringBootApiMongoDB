@@ -11,9 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Objects;
+
+
 
 @Service
 public class RecursoServicie {
+
     @Autowired
     RecursoRepository recursoRepository;
     RecursoMapper mapper = new RecursoMapper();
@@ -21,6 +26,9 @@ public class RecursoServicie {
     public RecursoDTO buscarPorId(String id){
         Recurso recurso = recursoRepository.findById(id).orElseThrow(()->new RuntimeException(" Recurso NO encontrado"));
         return mapper.fromCollection(recurso);
+    }
+    public List<RecursoDTO> findAll(){
+        return mapper.fromCollectionList(recursoRepository.findAll());
     }
 
 
@@ -55,13 +63,8 @@ public class RecursoServicie {
             Recurso recurso = mapper.fromDTO(recursoDTO);
             mapper.fromCollection(recursoRepository.save(recurso));
         }
-
-
         return mensaje;
-
     }
-
-
 
 
     public RecursoDTO crear(RecursoDTO recursoDTO) {
@@ -71,6 +74,14 @@ public class RecursoServicie {
 
     public void   delete(String id){
         recursoRepository.deleteById(id);
+    }
+
+    public List<RecursoDTO> BuscarAreaYTipo(RecursoDTO recursoDTO){
+
+        if(Objects.nonNull(recursoDTO.getTipoRecurso())&& Objects.nonNull(recursoDTO.getAreaTematica())){
+            return mapper.fromCollectionList(recursoRepository.findByTipoRecursoAndAreaTematica(recursoDTO.getTipoRecurso(),recursoDTO.getAreaTematica()));
+        }
+        return mapper.fromCollectionList( recursoRepository.findByTipoRecursoOrAreaTematica(recursoDTO.getTipoRecurso(),recursoDTO.getAreaTematica()));
     }
 
 

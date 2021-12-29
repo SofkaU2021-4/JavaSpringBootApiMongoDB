@@ -2,12 +2,14 @@ package com.co.sofka.biblioteca.Controllers;
 
 
 import com.co.sofka.biblioteca.DTOs.RecursoDTO;
+import com.co.sofka.biblioteca.Models.Recurso;
 import com.co.sofka.biblioteca.Services.RecursoServicie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @RestController
@@ -48,5 +50,16 @@ public class RecursoController {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
     }
+
+    @GetMapping("/buscar")
+    public ResponseEntity<List<RecursoDTO>>  BuscarTipoyArea(@RequestBody RecursoDTO recursoDTO) {
+            return  new ResponseEntity(recursoServicie.BuscarAreaYTipo(recursoDTO),HttpStatus.OK);
+    }
+    @GetMapping("")
+    public ResponseEntity<List<RecursoDTO>>  findAll() {
+        return  new ResponseEntity(recursoServicie.findAll(),HttpStatus.OK);
+    }
+
+
 
 }
