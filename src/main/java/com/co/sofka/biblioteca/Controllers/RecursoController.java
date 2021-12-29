@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Objects;
+
 @RestController
 @RequestMapping("/recursos")
 public class RecursoController {
@@ -34,6 +36,17 @@ public class RecursoController {
     public ResponseEntity<RecursoDTO> devolver(@PathVariable String id) {
         return new ResponseEntity(recursoServicie.DevolverUnRecurso(id), HttpStatus.OK);
 
+    }
+
+    @DeleteMapping("/borrar/{id}")
+    public ResponseEntity delete(@PathVariable("id") String id) {
+        try {
+            recursoServicie.delete(id);
+            return new ResponseEntity(HttpStatus.OK);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
     }
 
 }

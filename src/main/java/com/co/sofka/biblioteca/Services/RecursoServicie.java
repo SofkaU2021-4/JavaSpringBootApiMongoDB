@@ -69,6 +69,10 @@ public class RecursoServicie {
         return mapper.fromCollection(recursoRepository.save(recurso));
     }
 
+    public void   delete(String id){
+        recursoRepository.deleteById(id);
+    }
+
 
 
 
