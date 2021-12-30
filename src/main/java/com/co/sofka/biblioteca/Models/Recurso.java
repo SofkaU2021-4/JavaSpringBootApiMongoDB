@@ -28,6 +28,14 @@ public class Recurso {
         this.tipoRecurso = tipoRecurso;
     }
 
+    public Recurso(String id, String nombre, AreaTematica areaTematica, TipoRecuerso tipoRecurso, Boolean isDisponible) {
+        this.id=id;
+        this.nombre = nombre;
+        this.areaTematica = areaTematica;
+        this.tipoRecurso = tipoRecurso;
+        this.isDisponible=isDisponible;
+    }
+
     public void setId(String id) {
         this.id = id;
     }

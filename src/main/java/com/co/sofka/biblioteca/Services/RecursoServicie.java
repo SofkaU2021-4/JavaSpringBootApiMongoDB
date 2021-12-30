@@ -45,7 +45,7 @@ public class RecursoServicie {
             recursoDTO.setDisponible(false);
             recursoDTO.setFechaPrestamo(new Date());
             Recurso recurso = mapper.fromDTO(recursoDTO);
-            mapper.fromCollection(recursoRepository.save(recurso));
+           mapper.fromCollection(recursoRepository.save(recurso));
         }
 
 

@@ -11,6 +11,7 @@ public enum AreaTematica {
     TECNOLOGIA,
     MUSICA,
     DEPORTE,
+    INFANTIL
 
 
 
